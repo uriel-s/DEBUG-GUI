@@ -25,6 +25,10 @@ from datetime import datetime, timedelta
 # Add src directory to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
+# Import UI components
+from led_panel import create_led_panel
+from control_switches import create_control_switches
+
 # Import parameter configurations
 from physical_parameters import (
     get_all_parameters, 

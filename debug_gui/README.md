@@ -16,13 +16,14 @@ Interactive debugging interface for RDT hardware systems with external data uplo
 pip install -r requirements.txt
 ```
 
-## Launch 
+## Launch
 
 ```bash
 streamlit run gui/streamlit_debug_gui.py
 ```
 
 Or use the batch file:
+
 ```bash
 start.bat
 ```
@@ -30,7 +31,6 @@ start.bat
 ## Project Structure 📁
 
 ```
-debug_gui/
 ├── gui/                         # User Interface
 │   ├── streamlit_debug_gui.py   # Main application
 │   ├── control_switches.py     # Switch controls
@@ -38,7 +38,10 @@ debug_gui/
 ├── src/                        # Core logic
 │   └── physical_parameters.py  # Parameter definitions
 ├── data/                       # Sample data
-└── requirements.txt            # Python dependencies
+│   └── sample_parameters.csv   # Sample data file
+├── README.md                   # Documentation
+├── requirements.txt            # Python dependencies
+└── start.bat                   # Quick launcher
 ```
 
 ## Usage 💡
@@ -49,4 +52,5 @@ debug_gui/
 4. **Select parameters** - Use tabs to switch between different parameters
 
 ---
-*Developed for RDT R&D Systems* 🔬
+
+_Developed for RDT R&D Systems_ 🔬
