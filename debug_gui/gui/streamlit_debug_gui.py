@@ -36,7 +36,50 @@ from physical_parameters import (
 # Import our modular components
 from gui.control_switches import create_control_switches
 from gui.led_panel import create_led_panel
-from gui.data_uploader import process_external_data
+
+def process_external_data(df, parameter_configs):
+    """
+    Process external data to match the format needed for visualization
+    
+    Args:
+        df (pd.DataFrame): DataFrame with external data
+        parameter_configs (dict): Parameter configurations with thresholds
+        
+    Returns:
+        dict: Processed parameters with data for visualization
+    """
+    if df is None or df.empty:
+        return {}
+    
+    # Get unique parameters in the uploaded data
+    unique_params = df["Parameter"].unique()
+    
+    # Create processed parameters dictionary
+    processed_params = {}
+    
+    for param in unique_params:
+        # Skip if parameter is not in our configuration
+        if param not in parameter_configs:
+            continue
+            
+        # Filter data for this parameter
+        param_data = df[df["Parameter"] == param].copy()
+        
+        # Sort by timestamp and get the values
+        param_data = param_data.sort_values("Timestamp")
+        
+        # Get time labels and values
+        time_labels = [ts.strftime("%H:%M") for ts in param_data["Timestamp"]]
+        values = param_data["Value"].values
+        
+        # Create parameter data structure
+        processed_params[param] = {
+            **parameter_configs[param],  # Copy all config parameters
+            "data": values,
+            "time_labels": time_labels
+        }
+    
+    return processed_params
 
 def main():
     """Main function to run the Streamlit Debug GUI application"""
